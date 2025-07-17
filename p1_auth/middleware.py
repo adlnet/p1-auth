@@ -7,10 +7,11 @@ class AuthenticateSessionMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         if (hasattr(request, 'user') and request.user.is_authenticated) or \
-                not request.path_info.lower().removeprefix(getattr(
-                    settings,
-                    "FORCE_SCRIPT_NAME",
-                    "").lower()).startswith("/admin"):
+            (
+                settings.FORCE_SCRIPT_NAME and not request.path_info.lower().
+            removeprefix(settings.FORCE_SCRIPT_NAME.lower()).
+            startswith("/admin")
+        ) or not request.path_info.lower().startswith("/admin"):
             return
         user = auth.authenticate(request)
         if hasattr(user, 'backend'):

@@ -1,11 +1,14 @@
 # p1-auth
 
-Provides an authentication system for Platform One by decoding non-encrypted JWTs.
+Provides an authentication system for Platform One by decoding non-encrypted JWTs. Platform One uses JWT for authentication and adheres to the following:
+- Every request coming in is authenticated against P1 SSO.
+- The token has been pre-validated against the SSO public key.
+- The user making the requests is authenticated for the Impact Level (IL) that the application is deployed to.
 
 > [!CAUTION]
 > Signatures are not verified.
 
-Additionally provides configurations to automatically populate user attributes and assign user membership from JWT fields.
+Additionally provides configurations to automatically populate user attributes and assign user membership from JWT fields. More information about the strucutre of the JWT can be found on Confluence under "P1 SSO Authentication."
 
 ## Installation
 
